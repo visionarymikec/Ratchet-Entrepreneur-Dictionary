@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ratchet Entrepreneur Dictionary</title>
+</head>
+<body>
+  <h1>Random Flashcard</h1>
+  <div id="card">
+    <h2 id="term">Loading...</h2>
+    <p id="definition"></p>
+    <button onclick="showRandom()">Show Another</button>
+  </div>
+
+  <script>
+    let terms = [];
+
+    fetch('terms.json')
+      .then(response => response.json())
+      .then(data => {
+        terms = data;
+        showRandom();
+      });
+
+    function showRandom() {
+      if (terms.length === 0) return;
+      const randomTerm = terms[Math.floor(Math.random() * terms.length)];
+      document.getElementById('term').textContent = randomTerm.term;
+      document.getElementById('definition').textContent = randomTerm.definition;
+    }
+  </script>
+</body>
+</html>
